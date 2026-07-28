@@ -1,0 +1,23 @@
+{
+  "name": "textremofinhub",
+  "version": "1.0.1",
+  "description": "The financial hub for all accounts",
+  "keywords": [
+    "TextremoFinhub"
+  ],
+  "homepage": "https://github.com/TextremoBusiness/TextremoFinHub#readme",
+  "bugs": {
+    "url": "https://github.com/TextremoBusiness/TextremoFinHub/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TextremoBusiness/TextremoFinHub.git"
+  },
+  "license": "AGPL-3.0",
+  "author": "Textremo",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
