@@ -1,0 +1,62 @@
+@charset "utf-8";
+//导入颜色
+@import "./colors.less";
+//导入公式
+@import "./formula.less";
+
+// pc
+// 覆盖antd实现屏幕等高
+.view-port-body {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+}
+// 界面操作
+.NoPadding{
+  padding: 0;
+}
+.LeftMarginButNotTheFirst{
+  position:   relative;
+  font-size:  15px;
+  text-indent:  -50px;
+  padding-left: 50px;
+}
+// 放置所有路由
+.routers-container{
+  margin-top: 64px;
+  width: 100%;
+  .calc(height, "100% - 64px");
+}
+
+// mobile
+// mobile - tabbar
+.Mob-Tab{
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  
+
+  .weui-tabbar{
+    background-color: #001529;
+    .weui-tabbar__item{
+      padding-top: 8px;
+    }
+    .weui-bar__item_on{
+      background-color: #1890ff;
+      .weui-tabbar__label{
+        color: #FFF;
+      }
+      .weui-tabbar__icon{
+        color: #FFF;
+      }
+    }
+    .weui-tabbar__label{
+      margin: 0 0 5px;
+    }
+  }
+
+  .TabbarItemImg svg{
+    height: 24px;
+    width: 24px;
+  }
+}
