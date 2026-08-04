@@ -35,7 +35,7 @@ let beta = {
         hot: true,                                  // 实时刷新
         historyApiFallback: true,                   // 不跳转
         static: {
-            directory: path.resolve(__dirname, 'src'),  // 本地服务器所加载的页面所在的目录。以前是devServer.contentBase.path.resolve(__dirname, '.')
+            directory: path.resolve(__dirname, 'src/front'),  // 本地服务器所加载的页面所在的目录。以前是devServer.contentBase.path.resolve(__dirname, '.')
         },
         allowedHosts: 'all',                        // 以前是disableHostCheck: true,
         devMiddleware:{

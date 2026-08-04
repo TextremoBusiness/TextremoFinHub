@@ -43,7 +43,7 @@ module.exports = {
         rules: [
           // js compilation
           {
-            test: /\.?js$/,
+            test: /\.(js|jsx)$/,
             exclude: /node_modules/,
             use: {
               loader: "babel-loader",
@@ -51,10 +51,13 @@ module.exports = {
               // @babel/preset-react for transpiling react code
               // more details see https://babeljs.io/docs/en/presets/
               options: {
-                presets: ['@babel/preset-env', '@babel/preset-react'],
+                presets: [
+                  ['@babel/preset-env', { modules: 'commonjs' }], 
+                  '@babel/preset-react'
+                ],
                 plugins: [
                   "@babel/plugin-transform-runtime", // 依赖@babel/plugin-transform-runtime
-                  ["import", { "libraryName": "antd", "style": "css"}, "antd"],  // 依赖babel-plugin-import
+                  //["import", { "libraryName": "antd", "style": "css"}, "antd"],  // 依赖babel-plugin-import (Ant Design 自 v5 版本起全面转向了 CSS-in-JS 方案，天生具备按需加载和 Tree-shaking 能力。官方已明确说明不再需要且不支持 babel-plugin-import)
                 ]
               }
             }
@@ -68,26 +71,29 @@ module.exports = {
           }
         ]
     },
-    // plugins: [
-    //   // 把html自动加入（需要的javascript文件会自动引入）
-    //   new HtmlWebpackPlugin({
-    //     template: path.join(__dirname, "src/front", "index.html"),
-    //     inject: 'body', // all javascript resources will be placed at the bottom of the body element.
-    //     favicon: "./src/favicon.ico"
-    //     //minify: true //压缩html，这个在设置production-mode时自动启用，不用配置
-    //   }),
-    //   // 复制额外文件，打包robot.txt, sitemap.xml
-    //   new CopyPlugin({
-    //     patterns: [
-    //       {
-    //         from: path.posix.join(path.resolve(__dirname, "src").replace(/\\/g, "/"), "robot.txt")
-    //       },
-    //     ],
-    //   }),
-    //   // 忽略 moment.js的语言文件 (https://webpack.js.org/plugins/ignore-plugin/)
-    //   new webpack.IgnorePlugin({
-    //     resourceRegExp: /^\.\/locale$/,
-    //     contextRegExp: /moment$/,
-    //   }),
-    // ]
+    plugins: [
+      // 把html自动加入（需要的javascript文件会自动引入）
+      new HtmlWebpackPlugin({
+        template: path.join(__dirname, "src/front", "index.html"),
+        inject: 'body', // all javascript resources will be placed at the bottom of the body element.
+        favicon: "./src/front/favicon.ico"
+        //minify: true //压缩html，这个在设置production-mode时自动启用，不用配置
+      }),
+
+      // 复制额外文件，打包robot.txt, sitemap.xml
+      // new CopyPlugin({
+      //   patterns: [
+      //     {
+      //       from: path.posix.join(path.resolve(__dirname, "src").replace(/\\/g, "/"), "robot.txt")
+      //     },
+      //   ],
+      // }),
+
+      // Ant Design v5 已使用体积更小、天生支持 immutable 的 dayjs 替代了 moment.js。项目本身不需要再额外用 IgnorePlugin 去打包排除 moment 的多语言包。
+      // 忽略 moment.js的语言文件 (https://webpack.js.org/plugins/ignore-plugin/)
+      // new webpack.IgnorePlugin({
+      //   resourceRegExp: /^\.\/locale$/,
+      //   contextRegExp: /moment$/,
+      // }),
+    ]
 };
