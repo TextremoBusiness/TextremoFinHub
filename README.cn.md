@@ -11,7 +11,7 @@ npm install --save-dev babel-loader @babel/core @babel/preset-env @babel/preset-
 npm install --save-dev html-webpack-plugin copy-webpack-plugin style-loader css-loader
 npm install --save-dev less less-loader
 npm install react react-dom react-router-dom react-device-detect react-intl
-npm install antd
+npm install antd @ant-design/icons
 npm install less
 npm install flag-icons
 ```
@@ -23,6 +23,7 @@ cnpm install --save-dev html-webpack-plugin copy-webpack-plugin style-loader css
 cnpm install --save-dev less less-loader
 cnpm install react react-dom react-router-dom react-device-detect react-intl
 cnpm install antd @ant-design/icons
+cnpm install less
 cnpm install flag-icons
 ```
 
