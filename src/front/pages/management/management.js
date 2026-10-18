@@ -9,8 +9,7 @@ import { Card, Space } from 'antd'
 import { Button } from 'antd';                                      // 按钮
 import { Modal } from 'antd';                                       // 对话框
 /* antd - icons */
-import { AppstoreFilled, CopyrightOutlined, TagFilled } from '@ant-design/icons';
-import { SyncOutlined } from '@ant-design/icons';
+import { AppstoreFilled, CopyrightOutlined, TagFilled, InfoCircleFilled } from '@ant-design/icons';
 /* dnd-kit */
 import { DndContext, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
 import {useSortable} from '@dnd-kit/react/sortable';
@@ -27,6 +26,12 @@ const menuItems = [
     {key: 1, icon: <CopyrightOutlined />, label: <FormattedMessage id="page_mana_menu_1"/>},
     {key: 2, icon: <TagFilled />, label: <FormattedMessage id="page_mana_menu_2"/>}
 ];
+// add window titles
+const WinAddTitles = [
+    <FormattedMessage id="page_mana_model_title_0"/>,
+    <FormattedMessage id="page_mana_model_title_1"/>,
+    <FormattedMessage id="page_mana_model_title_2"/>
+];
 
 //  <FormattedMessage id="page_mana_menu_1"/>
 
@@ -35,9 +40,10 @@ export class Management extends React.Component{
         super(props);
         this.state = {
             menu_key: "0",
-            breadcrumb_title: menuItems[0].label,
+            content_title: menuItems[0].label,
             btn_save_loading: false,
-            win_add_open: false
+            win_add_open: false,
+            win_add_title: <FormattedMessage id="page_mana_model_title_0"/>
         };
     }
 
@@ -47,7 +53,8 @@ export class Management extends React.Component{
     menuOnClick = ({ _, key, keyPath, domEvent }) =>{
         this.setState({
             menu_key: [key],
-            breadcrumb_title: menuItems[key].label
+            content_title: menuItems[key].label,
+            win_add_title: WinAddTitles[key]
         });
     }
 
@@ -108,11 +115,11 @@ export class Management extends React.Component{
                 </Sider>
                 <Layout >
                     <Content className='PageContainer'>
-                        <Breadcrumb className='BreadCrumb' items={[{ title: this.state.breadcrumb_title}]} />
+                        <Breadcrumb className='BreadCrumb' items={[{ title: this.state.content_title}]} />
 
                         <div className="Content">
                             <div className='Instruction'>
-                                <h3>The list of {this.state.breadcrumb_title}</h3>
+                                <h3>The list of {this.state.content_title}</h3>
                                 <Flex className="Right" gap="small" wrap>
                                     <Button type="default" onClick={this.AddOnClick}>
                                         <FormattedMessage id="page_mana_btn_add"/>
@@ -174,11 +181,13 @@ export class Management extends React.Component{
 
                 {/* 添加对话框 */}
                 <Modal
-                    title="Basic Modal"
+                    title={this.state.win_add_title}
                     closable={{ 'aria-label': 'Custom Close Button' }}
                     open={this.state.win_add_open}
                     onOk={this.AddOk}
                     onCancel={this.AddCancel}
+                    okText={<FormattedMessage id="page_mana_model_add_btn_ok"/>}
+                    cancelText={<FormattedMessage id="page_mana_model_add_btn_cancel"/>}
                 >
                     <p>Some contents...</p>
                     <p>Some contents...</p>

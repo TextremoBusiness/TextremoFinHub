@@ -21,10 +21,15 @@ const zh_CN = {
 
 
     /* page - management */
-    page_mana_menu_0:   '国家或地区',
-    page_mana_menu_1:   '金融机构',
-    page_mana_menu_2:   '项目',
-    page_mana_btn_add:  "添加",
-    page_mana_btn_save: "保存",
+    page_mana_menu_0:               '国家或地区',
+    page_mana_menu_1:               '金融机构',
+    page_mana_menu_2:               '项目',
+    page_mana_btn_add:              "添加",
+    page_mana_btn_save:             "保存",
+    page_mana_model_title_0:        "添加国家或地区",
+    page_mana_model_title_1:        "添加金融机构",
+    page_mana_model_title_2:        "添加金融机构",
+    page_mana_model_add_btn_ok:     "确认",
+    page_mana_model_add_btn_cancel: "取消"
 };
 export default zh_CN;
