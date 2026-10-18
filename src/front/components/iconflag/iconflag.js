@@ -1,7 +1,9 @@
 import React from 'react';
 import 'flag-icons/css/flag-icons.min.css';
 
-// 封装一个国旗组件
+/*
+ * component - icon - flag
+ */
 const IconFlag = ({ code, size = 14 }) => {
   return (
     <span

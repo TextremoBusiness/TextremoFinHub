@@ -21,6 +21,12 @@
     @{property}: e("-webkit-calc(~'@{expression}')");
     @{property}: e("calc(~'@{expression}')");
 }
+.calc-v2(@property, @expression){
+  @{property}: ~"-webkit-calc(@{expression})";
+  @{property}: ~"-moz-calc(@{expression})";
+  @{property}: ~"calc(@{expression})";
+}
+
 /**
  * transform变换
  * @quto: 具体的变换内容

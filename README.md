@@ -1,5 +1,5 @@
-# Textremo Finhub
-The hub to manage all of your financial accounts including daily cost, bank transfer, interest, investment, etc..
+# Nesta
+This finhub to manage all of your financial accounts including daily cost, bank transfer, interest, investment, etc..
 
 ## Project Structure
 ### FrontEnd
@@ -12,6 +12,7 @@ npm install --save-dev html-webpack-plugin copy-webpack-plugin style-loader css-
 npm install --save-dev less less-loader
 npm install react react-dom react-router-dom react-device-detect react-intl
 npm install antd @ant-design/icons
+npm install @dnd-kit/react
 npm install less
 npm install flag-icons
 ```
@@ -23,6 +24,7 @@ cnpm install --save-dev html-webpack-plugin copy-webpack-plugin style-loader css
 cnpm install --save-dev less less-loader
 cnpm install react react-dom react-router-dom react-device-detect react-intl
 cnpm install antd @ant-design/icons
+cnpm install @dnd-kit/react
 cnpm install less
 cnpm install flag-icons
 ```

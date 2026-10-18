@@ -12,7 +12,7 @@ import { HomeFilled, DropboxOutlined, DockerOutlined } from '@ant-design/icons';
 // components
 import { UniHeader } from "./components/uniheader/uniheader"
 import { Fortune } from "./pages/fortune/fortune"
-
+import { Management } from "./pages/management/management"
 
 // css
 import "./theme.less";
@@ -81,7 +81,8 @@ export class App extends React.Component{
                             {/* This has to be another layout, otherwise the sidebars in Fortune won't take the entire height */}
                             <Layout className='routers-container'>
                                 <Routes>
-                                    <Route exact path="/"       element={ <Fortune/> } />
+                                    <Route exact path="/"           element={ <Fortune/> } />
+                                    <Route exact path="/management" element={ <Management/> } />
                                 </Routes>
                             </Layout>
                         </Layout>

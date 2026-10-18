@@ -1,0 +1,39 @@
+@charset "utf-8";
+@import "../theme.less";
+
+/* 左侧操控栏 */
+.SideBar{
+    overflow: auto;
+    .GroupName{
+        color: @color-black-opa-80;
+    }
+}
+/* 右侧内容区域 */
+.PageContainer{
+    padding: 0 16px;
+    height: auto;
+    overflow: auto;
+    .BreadCrumb{
+        margin: 16px 0; 
+    }
+    .Content{
+        .calc-v2(min-height, '100% - 54px');
+        width: 100%;
+        background-color: white;
+
+        .Instruction{
+            display:            flex;                               // 父容器设置 display: flex，子元素会默认沿水平方向排列，无需改动子元素原有的属性。
+            position:           relative;
+            padding:            0 24px;
+            border-bottom:      2px solid rgb(240, 240, 240);
+            overflow:           hidden;                             // 触发独立的块级格式化上下文，从而将子元素的 margin 锁在容器内部。
+            h1, h2, h3, h4, div{
+                margin:         16px;
+            }
+            .Right{
+                // 靠右对齐利用（Flexbox 规范中外边距吸收剩余空间的特性）
+                margin-left: auto;                      
+            }
+        }
+    }
+}

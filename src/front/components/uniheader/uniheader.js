@@ -17,10 +17,11 @@ import "./uniheader.less";
 
 const menuitems = [
     {key: "1", label: <Link to="/"><FormattedMessage id="header_menu_1"/></Link>, icon: <DollarOutlined style={{fontSize: 20}}/>},
-    {key: "2", label: <FormattedMessage id="header_menu_2"/>, icon: <MediumCircleFilled style={{fontSize: 20}}/>, theme: "light", children:[
-        {key: "21", label: <Link to="/demo01"><FormattedMessage id="demos_menu_01"/></Link>, icon: <DockerOutlined />},
-        {key: "22", label: <Link to="/demo02"><FormattedMessage id="demos_menu_02"/></Link>, icon: <PieChartOutlined />}
-    ]},
+    {key: "2", label: <Link to="/management"><FormattedMessage id="header_menu_2"/></Link>, icon: <MediumCircleFilled style={{fontSize: 20}}/>},
+    // {key: "2", label: <FormattedMessage id="header_menu_2"/>, icon: <MediumCircleFilled style={{fontSize: 20}}/>, theme: "light", children:[
+    //     {key: "21", label: <Link to="/demo01"><FormattedMessage id="demos_menu_01"/></Link>, icon: <DockerOutlined />},
+    //     {key: "22", label: <Link to="/demo02"><FormattedMessage id="demos_menu_02"/></Link>, icon: <PieChartOutlined />}
+    // ]},
     //{key: "21", label: "sfsfs", icon: <DockerOutlined />},
 ];
 
