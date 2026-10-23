@@ -30,6 +30,17 @@ const zh_CN = {
     page_mana_model_title_1:        "添加金融机构",
     page_mana_model_title_2:        "添加金融机构",
     page_mana_model_add_btn_ok:     "确认",
-    page_mana_model_add_btn_cancel: "取消"
+    page_mana_model_add_btn_cancel: "取消",
+
+    /* components */
+    /* components - listsort */
+    comp_listsort_btn_del:                  "删除",
+    comp_listsort_btn_pop_title:            "你确定要删除吗？",
+    comp_listsort_btn_pop_btn_ok:           "是",
+    comp_listsort_btn_pop_btn_cancel:       "否",
+    comp_listsort_del_res_success_title:    "删除成功",
+    comp_listsort_del_res_success_content:  "{name}已经成功删除。",
+    comp_listsort_del_res_error_title:      "删除失败",
+    comp_listsort_del_res_error_content:    "{name}含有内容无法删除，请先清空其内容。"
 };
 export default zh_CN;

@@ -5,9 +5,9 @@ import { FormattedMessage } from 'react-intl' // react-intl multiple languages
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
 const { Header, Content, Footer, Sider } = Layout;
 import { Flex } from 'antd';
-import { Card, Space } from 'antd'
 import { Button } from 'antd';                                      // 按钮
 import { Modal } from 'antd';                                       // 对话框
+import { Select } from 'antd';                                      // 选择框
 /* antd - icons */
 import { AppstoreFilled, CopyrightOutlined, TagFilled } from '@ant-design/icons';
 /* dnd-kit */
@@ -53,6 +53,12 @@ const WinAddTitles = [
     <FormattedMessage id="page_mana_model_title_2"/>
 ];
 
+const Contries = [
+    { value: '1', icon: <IconFlag code="cn"/>, label: 'China' },
+    { value: '2', label: 'USA' },
+    { value: '3', label: 'UK' },
+];
+
 //  <FormattedMessage id="page_mana_menu_1"/>
 
 export class Management extends React.Component{
@@ -64,10 +70,11 @@ export class Management extends React.Component{
             btn_save_loading: false,
             win_add_open: false,
             win_add_title: <FormattedMessage id="page_mana_model_title_0"/>,
-            // 初始化固定的 6 项拖拽列表数据
+            countries: [],
+            // list - the current shown list
             listSortItems: [
-                { id: 1, icon: <IconFlag code="cn" size="inherit"/>, label: 'Item 1' },
-                { id: 2, icon: <IconFlag code="cn" size="inherit"/>, label: 'Item 2' },
+                { id: 1, icon: <IconFlag code="cn" size="inherit"/>, label: 'Item 1', children: []},
+                { id: 2, icon: <IconFlag code="cn" size="inherit"/>, label: 'Item 2', children: [{id: 1}] },
                 { id: 3, icon: <IconFlag code="cn" size="inherit"/>, label: 'Item 3' },
                 { id: 4, icon: <IconFlag code="cn" size="inherit"/>, label: 'Item 4' },
                 { id: 5, icon: <IconFlag code="cn" size="inherit"/>, label: 'Item 5' },
@@ -141,8 +148,24 @@ export class Management extends React.Component{
      * 改变list顺序
      */
     onListChange = (newListSortItems) => {
-        this.setState({ listSortItems: newListSortItems });
+        return new Promise((resolve)=>{
+            this.setState({ listSortItems: newListSortItems }, ()=>{
+                resolve();    // 显式执行resolve
+            });
+        });
     };
+    // onListChange = async (newItems) => {
+    //     // 1. 等待后端接口保存完成
+    //     // await api.saveList(newItems);
+
+    //     // 2. 更新本地状态
+    //     await new Promise((resolve) => {
+    //         this.setState({ dragItems: newItems }, resolve);    // react会执行resolve函数
+    //     });
+        
+    //     console.log('远程接口和本地 State 均已完成');
+    // };
+
     // 拖拽结束更新排序
     // handleDragEnd = (event) => {
     //     this.setState((prevState) => ({
@@ -192,51 +215,6 @@ export class Management extends React.Component{
                                     ))}
                                 </ul>
                             </DragDropProvider> */}
-
-
-                            
-                            <Space vertical size={16}>
-                                <Card title="Default size card" extra={<a href="#">More</a>} style={{ width: 300 }}>
-                                <p>Card content</p>
-                                <p>Card content</p>
-                                <p>Card content</p>
-                                </Card>
-                                <Card title="Default size card" extra={<a href="#">More</a>} style={{ width: 300 }}>
-                                <p>Card content</p>
-                                <p>Card content</p>
-                                <p>Card content</p>
-                                </Card>
-                                <Card title="Default size card" extra={<a href="#">More</a>} style={{ width: 300 }}>
-                                <p>Card content</p>
-                                <p>Card content</p>
-                                <p>Card content</p>
-                                </Card>
-                                <Card title="Default size card" extra={<a href="#">More</a>} style={{ width: 300 }}>
-                                <p>Card content</p>
-                                <p>Card content</p>
-                                <p>Card content</p>
-                                </Card>
-                                <Card title="Default size card" extra={<a href="#">More</a>} style={{ width: 300 }}>
-                                <p>Card content</p>
-                                <p>Card content</p>
-                                <p>Card content</p>
-                                </Card>
-                                <Card title="Default size card" extra={<a href="#">More</a>} style={{ width: 300 }}>
-                                <p>Card content</p>
-                                <p>Card content</p>
-                                <p>Card content</p>
-                                </Card>
-                                <Card title="Default size card" extra={<a href="#">More</a>} style={{ width: 300 }}>
-                                <p>Card content</p>
-                                <p>Card content</p>
-                                <p>Card content</p>
-                                </Card>
-                                <Card size="small" title="Small size card" extra={<a href="#">More</a>} style={{ width: 300 }}>
-                                <p>Card content</p>
-                                <p>Card content</p>
-                                <p>Card content</p>
-                                </Card>
-                            </Space>
                         </div>
                     </Content>
                 </Layout>
@@ -251,9 +229,15 @@ export class Management extends React.Component{
                     okText={<FormattedMessage id="page_mana_model_add_btn_ok"/>}
                     cancelText={<FormattedMessage id="page_mana_model_add_btn_cancel"/>}
                 >
-                    <p>Some contents...</p>
-                    <p>Some contents...</p>
-                    <p>Some contents...</p>
+                    <Select
+                        showSearch={{
+                        filterOption: (input, option) =>
+                            (option?.label ?? '').toLowerCase().includes(input.toLowerCase()),
+                        }}
+                        notFoundContent="Nono"
+                        placeholder="Select a person"
+                        options={Contries}
+                    />
                 </Modal>
             </>
         );
