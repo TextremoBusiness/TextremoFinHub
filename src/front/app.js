@@ -7,7 +7,6 @@ import { langs_codes, langs_pkgs } from './locale';                             
 // antd-layout
 import { Layout} from 'antd';
 // antd-icon
-import { HomeFilled, DropboxOutlined, DockerOutlined } from '@ant-design/icons';
 
 // components
 import { UniHeader } from "./components/uniheader/uniheader"

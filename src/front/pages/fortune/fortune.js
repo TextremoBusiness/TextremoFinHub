@@ -7,10 +7,9 @@ const { Header, Content, Footer, Sider } = Layout;
 
 import { Card, Space } from 'antd'
 /* antd - icons */
-import { DesktopOutlined, FileOutlined, PieChartOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons';
+import { DesktopOutlined, FileOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons';
 import { UnorderedListOutlined } from '@ant-design/icons';
-
-
+/* components */
 import IconFlag from '../../components/iconflag/iconflag';
 /* less */
 import "../page.less"

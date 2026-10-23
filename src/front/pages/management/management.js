@@ -1,5 +1,5 @@
 /* react */
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl' // react-intl multiple languages
 /* antd */
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
@@ -9,15 +9,35 @@ import { Card, Space } from 'antd'
 import { Button } from 'antd';                                      // 按钮
 import { Modal } from 'antd';                                       // 对话框
 /* antd - icons */
-import { AppstoreFilled, CopyrightOutlined, TagFilled, InfoCircleFilled } from '@ant-design/icons';
+import { AppstoreFilled, CopyrightOutlined, TagFilled } from '@ant-design/icons';
 /* dnd-kit */
-import { DndContext, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
-import {useSortable} from '@dnd-kit/react/sortable';
-/* icon */
+import { DragDropProvider } from '@dnd-kit/react';
+import { useSortable } from '@dnd-kit/react/sortable';
+import { move } from '@dnd-kit/helpers';
+/* components */
 import IconFlag from '../../components/iconflag/iconflag';
+import ListSort from '../../components/listsort/listsort';
 /* less */
 import "../page.less"
 
+// 独立的可排序单项组件（用于承载 Hook）
+function SortableItem({ id, index, children }) {
+    const [element, setElement] = useState(null);
+    const handleRef = useRef(null);
+    const { isDragging } = useSortable({ id, index, element, handle: handleRef });
+
+    return (
+        <li
+            ref={setElement}
+            className="item"
+            data-shadow={isDragging || undefined}
+            style={{ listStyle: 'none' }}
+        >
+            <div style={{ flex: 1 }}>{children}</div>
+            <button ref={handleRef} className="handle" type="button" />
+        </li>
+    );
+}
 
 
 // sidebar menus
@@ -43,7 +63,16 @@ export class Management extends React.Component{
             content_title: menuItems[0].label,
             btn_save_loading: false,
             win_add_open: false,
-            win_add_title: <FormattedMessage id="page_mana_model_title_0"/>
+            win_add_title: <FormattedMessage id="page_mana_model_title_0"/>,
+            // 初始化固定的 6 项拖拽列表数据
+            listSortItems: [
+                { id: 1, icon: <IconFlag code="cn" size="inherit"/>, label: 'Item 1' },
+                { id: 2, icon: <IconFlag code="cn" size="inherit"/>, label: 'Item 2' },
+                { id: 3, icon: <IconFlag code="cn" size="inherit"/>, label: 'Item 3' },
+                { id: 4, icon: <IconFlag code="cn" size="inherit"/>, label: 'Item 4' },
+                { id: 5, icon: <IconFlag code="cn" size="inherit"/>, label: 'Item 5' },
+                { id: 6, icon: <IconFlag code="cn" size="inherit"/>, label: 'Item 6' }
+            ]
         };
     }
 
@@ -106,7 +135,28 @@ export class Management extends React.Component{
             win_add_open: false
         });
     };
+
     
+    /**
+     * 改变list顺序
+     */
+    onListChange = (newListSortItems) => {
+        this.setState({ listSortItems: newListSortItems });
+    };
+    // 拖拽结束更新排序
+    // handleDragEnd = (event) => {
+    //     this.setState((prevState) => ({
+    //         listSortItems: move(prevState.listSortItems, event)
+    //     }),
+    //     () => {
+    //         // 这个回调在 state 真正写入并完成更新后触发
+    //         console.log('排序后的真实数据:', this.state.listSortItems);
+    //         // 提取出纯 ID 数组对比更直观
+    //         console.log('当前 ID 排序:', this.state.listSortItems.map(item => item.id));
+    //     }
+    //     );
+    // };
+
     render(){
         return(
             <>
@@ -129,8 +179,20 @@ export class Management extends React.Component{
                                     </Button>
                                 </Flex>
                             </div>
-                            
-      
+                            <ListSort
+                                items={this.state.listSortItems}
+                                onChange={this.onListChange}
+                            />
+                            {/* <DragDropProvider onDragEnd={this.handleDragEnd}>
+                                <ul className="list" style={{ padding: 0, margin: '16px 0' }}>
+                                    {this.state.listSortItems.map((item, index) => (
+                                        <SortableItem key={item.id} id={item.id} index={index}>
+                                            <span>{item.title}</span>
+                                        </SortableItem>
+                                    ))}
+                                </ul>
+                            </DragDropProvider> */}
+
 
                             
                             <Space vertical size={16}>

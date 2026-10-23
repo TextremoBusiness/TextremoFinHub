@@ -8,7 +8,7 @@ import {FormattedMessage} from 'react-intl'
 import { Layout, Menu} from 'antd';
 const { Header} = Layout;
 // antd-icon
-import { AreaChartOutlined, DollarOutlined, MediumCircleFilled, DockerOutlined, PieChartOutlined } from '@ant-design/icons';
+import { AreaChartOutlined, DollarOutlined, MediumCircleFilled } from '@ant-design/icons';
 // utils
 import { isObjEmpty } from '../../utils/commonfns';
 
