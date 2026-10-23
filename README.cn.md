@@ -15,6 +15,7 @@ npm install antd @ant-design/icons
 npm install @dnd-kit/react @dnd-kit/helpers
 npm install less
 npm install flag-icons
+npm install dexie
 ```
 如果你在中国，请使用`cnpm`并使用如下的替代脚本来部署开发环境
 ```sh
@@ -27,6 +28,7 @@ cnpm install antd @ant-design/icons
 cnpm install @dnd-kit/react @dnd-kit/helpers
 cnpm install less
 cnpm install flag-icons
+cnpm install dexie
 ```
 
 ## 使用说明

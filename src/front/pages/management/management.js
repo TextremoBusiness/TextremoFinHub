@@ -83,6 +83,10 @@ export class Management extends React.Component{
         };
     }
 
+    async componentDidMount(){
+        await dataManager.dbInit();
+    }
+
     /**
      * menu onClick（箭头函数，没有自己的 this，它会自动捕获定义时所在上下文（即当前组件实例）的 this）
      */

@@ -15,6 +15,7 @@ npm install antd @ant-design/icons
 npm install @dnd-kit/react @dnd-kit/helpers
 npm install less
 npm install flag-icons
+npm install dexie
 ```
 If you are in China, please use `cnpm` and run the alternative scripts below
 ```sh
@@ -27,6 +28,7 @@ cnpm install antd @ant-design/icons
 cnpm install @dnd-kit/react @dnd-kit/helpers
 cnpm install less
 cnpm install flag-icons
+cnpm install dexie
 ```
 
 ## How to run
