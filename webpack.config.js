@@ -40,6 +40,9 @@ module.exports = {
     },
     // module/rules/options 方案二(必须：补全解析后缀)
     resolve: {
+      alias:{
+        '@': path.resolve(__dirname, './src/front') // 让 @ 指向项目的 src/front 目录
+      },
       extensions: ['.js', '.jsx', '.json', '.mjs'] // 确保补全 .jsx 和 .mjs
     },
     // tell webpack to transpile javascript files using babel before bundling them

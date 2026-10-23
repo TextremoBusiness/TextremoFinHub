@@ -17,6 +17,8 @@ import { move } from '@dnd-kit/helpers';
 /* components */
 import IconFlag from '../../components/iconflag/iconflag';
 import ListSort from '../../components/listsort/listsort';
+/* api */
+import dataManager from '@/api/dataManager';
 /* less */
 import "../page.less"
 import "./management.less"
@@ -41,18 +43,18 @@ const WinAddSelectPlaceHolder = [
 ];
 
 const Contries = [
-    { value: 'cn',  search: "cn",   label:  <div className='PageMana-Model-Select-CountryRegion-Item'><IconFlag code="cn" size={16} /><FormattedMessage id="list_cr_cn"/></div> },
-    { value: 'hk',  search: "hk",   label:  <div className='PageMana-Model-Select-CountryRegion-Item'><IconFlag code="hk" size={16} /><FormattedMessage id="list_cr_hk"/></div> },
-    { value: 'tw',  search: "tw",   label:  <div className='PageMana-Model-Select-CountryRegion-Item'><IconFlag code="tw" size={16} /><FormattedMessage id="list_cr_tw"/></div> },
-    { value: 'mo',  search: "mo",   label:  <div className='PageMana-Model-Select-CountryRegion-Item'><IconFlag code="mo" size={16} /><FormattedMessage id="list_cr_mo"/></div> },
-    { value: 'my',  search: "my",   label:  <div className='PageMana-Model-Select-CountryRegion-Item'><IconFlag code="my" size={16} /><FormattedMessage id="list_cr_my"/></div> },
-    { value: 'sg',  search: "sg",   label:  <div className='PageMana-Model-Select-CountryRegion-Item'><IconFlag code="sg" size={16} /><FormattedMessage id="list_cr_sg"/></div> },
-    { value: 'us',  search: "us",   label:  <div className='PageMana-Model-Select-CountryRegion-Item'><IconFlag code="us" size={16} /><FormattedMessage id="list_cr_us"/></div> },
-    { value: 'ca',  search: "ca",   label:  <div className='PageMana-Model-Select-CountryRegion-Item'><IconFlag code="ca" size={16} /><FormattedMessage id="list_cr_ca"/></div> },
-    { value: 'au',  search: "au",   label:  <div className='PageMana-Model-Select-CountryRegion-Item'><IconFlag code="au" size={16} /><FormattedMessage id="list_cr_au"/></div> },
-    { value: 'nz',  search: "nz",   label:  <div className='PageMana-Model-Select-CountryRegion-Item'><IconFlag code="nz" size={16} /><FormattedMessage id="list_cr_nz"/></div> },
-    { value: 'gb',  search: "gb",   label:  <div className='PageMana-Model-Select-CountryRegion-Item'><IconFlag code="gb" size={16} /><FormattedMessage id="list_cr_gb"/></div> },
-    { value: 'ie',  search: "ie",   label:  <div className='PageMana-Model-Select-CountryRegion-Item'><IconFlag code="ie" size={16} /><FormattedMessage id="list_cr_ie"/></div> },
+    { value: 'cn',  search: "cn", icon: <IconFlag code="cn" size="inherit" />, label:  <div className='PageMana-Model-Select-CountryRegion-Item'><IconFlag code="cn" size={16} /><FormattedMessage id="list_cr_cn"/></div> },
+    { value: 'hk',  search: "hk", icon: <IconFlag code="hk" size="inherit" />, label:  <div className='PageMana-Model-Select-CountryRegion-Item'><IconFlag code="hk" size={16} /><FormattedMessage id="list_cr_hk"/></div> },
+    { value: 'tw',  search: "tw", icon: <IconFlag code="tw" size="inherit" />, label:  <div className='PageMana-Model-Select-CountryRegion-Item'><IconFlag code="tw" size={16} /><FormattedMessage id="list_cr_tw"/></div> },
+    { value: 'mo',  search: "mo", icon: <IconFlag code="mo" size="inherit" />, label:  <div className='PageMana-Model-Select-CountryRegion-Item'><IconFlag code="mo" size={16} /><FormattedMessage id="list_cr_mo"/></div> },
+    { value: 'my',  search: "my", icon: <IconFlag code="my" size="inherit" />, label:  <div className='PageMana-Model-Select-CountryRegion-Item'><IconFlag code="my" size={16} /><FormattedMessage id="list_cr_my"/></div> },
+    { value: 'sg',  search: "sg", icon: <IconFlag code="sg" size="inherit" />, label:  <div className='PageMana-Model-Select-CountryRegion-Item'><IconFlag code="sg" size={16} /><FormattedMessage id="list_cr_sg"/></div> },
+    { value: 'us',  search: "us", icon: <IconFlag code="us" size="inherit" />, label:  <div className='PageMana-Model-Select-CountryRegion-Item'><IconFlag code="us" size={16} /><FormattedMessage id="list_cr_us"/></div> },
+    { value: 'ca',  search: "ca", icon: <IconFlag code="ca" size="inherit" />, label:  <div className='PageMana-Model-Select-CountryRegion-Item'><IconFlag code="ca" size={16} /><FormattedMessage id="list_cr_ca"/></div> },
+    { value: 'au',  search: "au", icon: <IconFlag code="au" size="inherit" />, label:  <div className='PageMana-Model-Select-CountryRegion-Item'><IconFlag code="au" size={16} /><FormattedMessage id="list_cr_au"/></div> },
+    { value: 'nz',  search: "nz", icon: <IconFlag code="nz" size="inherit" />, label:  <div className='PageMana-Model-Select-CountryRegion-Item'><IconFlag code="nz" size={16} /><FormattedMessage id="list_cr_nz"/></div> },
+    { value: 'gb',  search: "gb", icon: <IconFlag code="gb" size="inherit" />, label:  <div className='PageMana-Model-Select-CountryRegion-Item'><IconFlag code="gb" size={16} /><FormattedMessage id="list_cr_gb"/></div> },
+    { value: 'ie',  search: "ie", icon: <IconFlag code="ie" size="inherit" />, label:  <div className='PageMana-Model-Select-CountryRegion-Item'><IconFlag code="ie" size={16} /><FormattedMessage id="list_cr_ie"/></div> },
 ];
 
 //  <FormattedMessage id="page_mana_menu_1"/>
@@ -67,6 +69,7 @@ export class Management extends React.Component{
             win_add_open: false,
             win_add_title: <FormattedMessage id="page_mana_model_title_0"/>,
             win_add_select_placeholder: <FormattedMessage id="page_mana_model_select_placeholder_0"/>,
+            win_add_item: null,
             countries: [],
             // list - the current shown list
             listSortItems: [
