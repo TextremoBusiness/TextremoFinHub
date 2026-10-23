@@ -1,6 +1,6 @@
 /* react */
 import React, { useRef, useState } from 'react';
-import { FormattedMessage } from 'react-intl' // react-intl multiple languages
+import { FormattedMessage, IntlContext } from 'react-intl' // react-intl multiple languages
 /* antd */
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
 const { Header, Content, Footer, Sider } = Layout;
@@ -19,25 +19,7 @@ import IconFlag from '../../components/iconflag/iconflag';
 import ListSort from '../../components/listsort/listsort';
 /* less */
 import "../page.less"
-
-// 独立的可排序单项组件（用于承载 Hook）
-function SortableItem({ id, index, children }) {
-    const [element, setElement] = useState(null);
-    const handleRef = useRef(null);
-    const { isDragging } = useSortable({ id, index, element, handle: handleRef });
-
-    return (
-        <li
-            ref={setElement}
-            className="item"
-            data-shadow={isDragging || undefined}
-            style={{ listStyle: 'none' }}
-        >
-            <div style={{ flex: 1 }}>{children}</div>
-            <button ref={handleRef} className="handle" type="button" />
-        </li>
-    );
-}
+import "./management.less"
 
 
 // sidebar menus
@@ -46,22 +28,36 @@ const menuItems = [
     {key: 1, icon: <CopyrightOutlined />, label: <FormattedMessage id="page_mana_menu_1"/>},
     {key: 2, icon: <TagFilled />, label: <FormattedMessage id="page_mana_menu_2"/>}
 ];
-// add window titles
+// window
 const WinAddTitles = [
     <FormattedMessage id="page_mana_model_title_0"/>,
     <FormattedMessage id="page_mana_model_title_1"/>,
     <FormattedMessage id="page_mana_model_title_2"/>
 ];
+const WinAddSelectPlaceHolder = [
+    <FormattedMessage id="page_mana_model_select_placeholder_0"/>,
+    <FormattedMessage id="page_mana_model_select_placeholder_1"/>,
+    <FormattedMessage id="page_mana_model_select_placeholder_2"/>
+];
 
 const Contries = [
-    { value: '1', icon: <IconFlag code="cn"/>, label: 'China' },
-    { value: '2', label: 'USA' },
-    { value: '3', label: 'UK' },
+    { value: 'cn',  search: "cn",   label:  <div className='PageMana-Model-Select-CountryRegion-Item'><IconFlag code="cn" size={16} /><FormattedMessage id="list_cr_cn"/></div> },
+    { value: 'hk',  search: "hk",   label:  <div className='PageMana-Model-Select-CountryRegion-Item'><IconFlag code="hk" size={16} /><FormattedMessage id="list_cr_hk"/></div> },
+    { value: 'tw',  search: "tw",   label:  <div className='PageMana-Model-Select-CountryRegion-Item'><IconFlag code="tw" size={16} /><FormattedMessage id="list_cr_tw"/></div> },
+    { value: 'mo',  search: "mo",   label:  <div className='PageMana-Model-Select-CountryRegion-Item'><IconFlag code="mo" size={16} /><FormattedMessage id="list_cr_mo"/></div> },
+    { value: 'my',  search: "my",   label:  <div className='PageMana-Model-Select-CountryRegion-Item'><IconFlag code="my" size={16} /><FormattedMessage id="list_cr_my"/></div> },
+    { value: 'sg',  search: "sg",   label:  <div className='PageMana-Model-Select-CountryRegion-Item'><IconFlag code="sg" size={16} /><FormattedMessage id="list_cr_sg"/></div> },
+    { value: 'us',  search: "us",   label:  <div className='PageMana-Model-Select-CountryRegion-Item'><IconFlag code="us" size={16} /><FormattedMessage id="list_cr_us"/></div> },
+    { value: 'ca',  search: "ca",   label:  <div className='PageMana-Model-Select-CountryRegion-Item'><IconFlag code="ca" size={16} /><FormattedMessage id="list_cr_ca"/></div> },
+    { value: 'au',  search: "au",   label:  <div className='PageMana-Model-Select-CountryRegion-Item'><IconFlag code="au" size={16} /><FormattedMessage id="list_cr_au"/></div> },
+    { value: 'nz',  search: "nz",   label:  <div className='PageMana-Model-Select-CountryRegion-Item'><IconFlag code="nz" size={16} /><FormattedMessage id="list_cr_nz"/></div> },
+    { value: 'gb',  search: "gb",   label:  <div className='PageMana-Model-Select-CountryRegion-Item'><IconFlag code="gb" size={16} /><FormattedMessage id="list_cr_gb"/></div> },
+    { value: 'ie',  search: "ie",   label:  <div className='PageMana-Model-Select-CountryRegion-Item'><IconFlag code="ie" size={16} /><FormattedMessage id="list_cr_ie"/></div> },
 ];
 
 //  <FormattedMessage id="page_mana_menu_1"/>
-
 export class Management extends React.Component{
+
     constructor(props){
         super(props);
         this.state = {
@@ -70,15 +66,16 @@ export class Management extends React.Component{
             btn_save_loading: false,
             win_add_open: false,
             win_add_title: <FormattedMessage id="page_mana_model_title_0"/>,
+            win_add_select_placeholder: <FormattedMessage id="page_mana_model_select_placeholder_0"/>,
             countries: [],
             // list - the current shown list
             listSortItems: [
-                { id: 1, icon: <IconFlag code="cn" size="inherit"/>, label: 'Item 1', children: []},
-                { id: 2, icon: <IconFlag code="cn" size="inherit"/>, label: 'Item 2', children: [{id: 1}] },
-                { id: 3, icon: <IconFlag code="cn" size="inherit"/>, label: 'Item 3' },
-                { id: 4, icon: <IconFlag code="cn" size="inherit"/>, label: 'Item 4' },
-                { id: 5, icon: <IconFlag code="cn" size="inherit"/>, label: 'Item 5' },
-                { id: 6, icon: <IconFlag code="cn" size="inherit"/>, label: 'Item 6' }
+                { id: "cn", icon: <IconFlag code="cn" size="inherit"/>, label: 'Item 1', children: []},
+                { id: "cn2", icon: <IconFlag code="cn" size="inherit"/>, label: 'Item 2', children: [{id: 1}] },
+                { id: "cn3", icon: <IconFlag code="cn" size="inherit"/>, label: 'Item 3' },
+                { id: "cn4", icon: <IconFlag code="cn" size="inherit"/>, label: 'Item 4' },
+                { id: "cn5", icon: <IconFlag code="cn" size="inherit"/>, label: 'Item 5' },
+                { id: "cn6", icon: <IconFlag code="cn" size="inherit"/>, label: 'Item 6' }
             ]
         };
     }
@@ -90,7 +87,8 @@ export class Management extends React.Component{
         this.setState({
             menu_key: [key],
             content_title: menuItems[key].label,
-            win_add_title: WinAddTitles[key]
+            win_add_title: WinAddTitles[key],
+            win_add_select_placeholder: WinAddSelectPlaceHolder[key],
         });
     }
 
@@ -142,7 +140,9 @@ export class Management extends React.Component{
             win_add_open: false
         });
     };
-
+    AddSelectOnChange = (value, option) => {
+        console.log(value);
+    }
     
     /**
      * 改变list顺序
@@ -202,19 +202,7 @@ export class Management extends React.Component{
                                     </Button>
                                 </Flex>
                             </div>
-                            <ListSort
-                                items={this.state.listSortItems}
-                                onChange={this.onListChange}
-                            />
-                            {/* <DragDropProvider onDragEnd={this.handleDragEnd}>
-                                <ul className="list" style={{ padding: 0, margin: '16px 0' }}>
-                                    {this.state.listSortItems.map((item, index) => (
-                                        <SortableItem key={item.id} id={item.id} index={index}>
-                                            <span>{item.title}</span>
-                                        </SortableItem>
-                                    ))}
-                                </ul>
-                            </DragDropProvider> */}
+                            <ListSort items={this.state.listSortItems} onChange={this.onListChange}/>
                         </div>
                     </Content>
                 </Layout>
@@ -230,13 +218,14 @@ export class Management extends React.Component{
                     cancelText={<FormattedMessage id="page_mana_model_add_btn_cancel"/>}
                 >
                     <Select
+                        className="PageMana-Model-Select-CountryRegion"
                         showSearch={{
-                        filterOption: (input, option) =>
-                            (option?.label ?? '').toLowerCase().includes(input.toLowerCase()),
+                            filterOption: (input, option) => (option?.search ?? '').toLowerCase().includes(input.toLowerCase()),
                         }}
-                        notFoundContent="Nono"
-                        placeholder="Select a person"
+                        notFoundContent= {<FormattedMessage id="page_mana_model_select_nofoundcontent"/>}
+                        placeholder={this.state.win_add_select_placeholder}
                         options={Contries}
+                        onChange={this.AddSelectOnChange}
                     />
                 </Modal>
             </>

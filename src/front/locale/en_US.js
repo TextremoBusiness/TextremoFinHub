@@ -1,38 +1,42 @@
 const en_US = {
-    /* header */
+    /* list */
+    /* list - country or regions*/
+    list_cr_cn: 'China', 
+    list_cr_hk: 'Hongkong', 
+    list_cr_tw: 'Taiwan', 
+    list_cr_mo: 'Macau', 
+    list_cr_my: 'Malasia',
+    list_cr_sg: 'Singapore',
+    list_cr_us: 'USA',
+    list_cr_ca: 'Canada',
+    list_cr_au: 'Australia',
+    list_cr_nz: 'New Zealand',
+    list_cr_gb: 'United Kindoms',
+    list_cr_ie: 'Ireland',
+
+    /* page - fortunme */
+    page_fort_menu_overview: 'Overview', 
+    /* page - management */
+    page_mana_menu_0:                           'Countries / Regions',
+    page_mana_menu_1:                           'Financial Institutions',
+    page_mana_menu_2:                           'Items',
+    page_mana_btn_add:                          "Add",
+    page_mana_btn_save:                         "Save",
+    page_mana_model_title_0:                    "Add a country or region",
+    page_mana_model_title_1:                    "Add a finanical institution",
+    page_mana_model_title_2:                    "Add an item",
+    page_mana_model_add_btn_ok:                 "Ok",
+    page_mana_model_add_btn_cancel:             "Cancel",
+    page_mana_model_select_placeholder_0:       "Select a country or region",
+    page_mana_model_select_placeholder_1:       "Select a finanical institution",
+    page_mana_model_select_placeholder_2:       "Input the item name",
+    page_mana_model_select_nofoundcontent:      "No Data",
+
+    /* components */
+    /* components - header */
     header_name: 'Nesta',
     header_menu_1: 'Fortune',
     header_menu_2: 'Management',
-
-        /* page - fortunme */
-    page_fort_menu_overview: 'Overview', 
-    page_fort_menu_cn: 'China', 
-    page_fort_menu_hk: 'Hongkong', 
-    page_fort_menu_tw: 'Taiwan', 
-    page_fort_menu_mo: 'Macau', 
-    page_fort_menu_my: 'Malasia',
-    page_fort_menu_sg: 'Singapore',
-    page_fort_menu_us: 'USA',
-    page_fort_menu_ca: 'Canada',
-    page_fort_menu_au: 'Australia',
-    page_fort_menu_nz: 'New Zealand',
-    page_fort_menu_uk: 'UK',
-    page_fort_menu_ie: 'Ireland',
-
-    /* page - management */
-    page_mana_menu_0:               'Countries / Regions',
-    page_mana_menu_1:               'Financial Institutions',
-    page_mana_menu_2:               'Items',
-    page_mana_btn_add:              "Add",
-    page_mana_btn_save:             "Save",
-    page_mana_model_title_0:        "Add a country or region",
-    page_mana_model_title_1:        "Add a finanical institution",
-    page_mana_model_title_2:        "Add an item",
-    page_mana_model_add_btn_ok:     "Ok",
-    page_mana_model_add_btn_cancel: "Cancel",
-
-
-    /* components */
     /* components - listsort */
     comp_listsort_btn_del:                  "Delete",
     comp_listsort_btn_pop_title:            "Are you sure to delete this item?",
