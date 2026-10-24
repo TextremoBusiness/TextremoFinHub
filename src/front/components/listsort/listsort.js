@@ -74,7 +74,7 @@ export default function ListSort({ items, onChange }) {
     notifyApi[type]({
       title: <FormattedMessage id={notifyTitles[type]} />,
       description: <div className='CompListSort-Notity'>{icon? <span className='Icon'>{icon}</span>:null}<FormattedMessage id={notifyDescriptions[type]} values={{name: label}}/></div>,
-      duration: 0,
+      //duration: 0, // 不关闭弹窗（调试开启）
     });
   };
   

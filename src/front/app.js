@@ -50,6 +50,14 @@ export class App extends React.Component{
                     lang_pkg: langs_pkgs[langs_codes.indexOf('zh')],
                 });
             }
+        }else if (userLang.search('es') != -1){
+            // spanish
+            if (langs_codes[this.state.selected_lang_id] != 'es'){
+                this.setState({
+                    lang_id: langs_codes.indexOf('es'),
+                    lang_pkg: langs_pkgs[langs_codes.indexOf('es')],
+                });
+            }
         }else{
             // other language (not supported, set to English)
             if (langs_codes[this.state.selected_lang_id] != 'en'){
